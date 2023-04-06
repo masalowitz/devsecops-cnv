@@ -16,6 +16,9 @@ clusterGroup:
   - devsecops-ci
   - openshift-storage
   - quay-enterprise
+  - openshift-cnv
+  - ansible-automation-platform
+  - edge-gitops-vms
 
 #  subscriptions:  OpenShift Operator subscriptions from OLM/OperatorHub
 #  - name: the Operator package name (required)
@@ -45,6 +48,14 @@ clusterGroup:
     openshift-compliance:
       name: compliance-operator
       namespace: openshift-compliance
+
+    aap-operator:
+      name: ansible-automation-platform-operator
+      namespace: ansible-automation-platform
+ 
+    openshift-virtualization:
+      name: kubevirt-hyperconverged
+      namespace: openshift-cnv
 
 # The following section is used by
 # OpenShift GitOps (ArgoCD)
@@ -131,6 +142,28 @@ clusterGroup:
       project: hub
       path: charts/hub/cli-tools
 
+    aap:
+      name: ansible-automation-platform
+      project: hub
+      path: charts/hub/ansible-automation-platform
+ 
+    aap-config:
+      name: aap-config
+      project: hub
+      path: charts/hub/aap-config
+
+    openshit-cnv:
+      name: openshift-cnv
+      namespace: openshift-cnv
+      project: hub
+      path: charts/hub/cnv
+
+    edge-gitops-vms:
+      name: edge-gitops-vms
+      namespace: edge-gitops-vms
+      project: hub
+      path: charts/hub/edge-gitops-vms
+
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
@@ -146,6 +179,32 @@ clusterGroup:
       timeout: 234
       # verbosity: "-v"
 
+    - name: deploy-kubevirt-worker
+      playbook: ansible/deploy_kubevirt_worker.yml
+      verbosity: -vvv
+
+    - name: configure-aap-controller
+      playbook: ansible/imperative_configure_controller.yml
+      image: quay.io/hybridcloudpatterns/ansible-edge-gitops-ee:latest
+      verbosity: -vvv
+      timeout: "900"
+
+    clusterRoleYaml:
+      - apiGroups:
+          - "*"
+        resources:
+          - machinesets
+        verbs:
+          - "*"
+      - apiGroups:
+          - "*"
+        resources:
+          - "*"
+        verbs:
+          - get
+          - list
+          - watch
+  
 # This section is used by ACM
   managedClusterGroups:
   - name: development
