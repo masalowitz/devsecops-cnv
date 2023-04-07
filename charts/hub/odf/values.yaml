@@ -30,9 +30,15 @@ ocs:
       memory: 5Gi
     pvc:
       storage: 2Ti
-  storageClass:
+
+storageClass:
+  rgw:
     name: ocs-storagecluster-ceph-rgw
-    region: us-west-1  # overwritten
+    region: us-east-1  # overwritten
+    objectStoreName: ocs-storagecluster-cephobjectstore
+
+  rbd:
+    name: ocs-storagecluster-ceph-rbd
     objectStoreName: ocs-storagecluster-cephobjectstore
 
 toolbox:
@@ -41,7 +47,7 @@ toolbox:
 
 global:
   hub:
-    region: us-west-1
+    region: us-east-1
   xraylab:
     namespace: "openshift-storage"
   datacenter:

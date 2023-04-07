@@ -32,8 +32,8 @@ spec:
     replica: 3
     resources:
       requests:
-        cpu: {{ .Values.odf.osd.requests.cpu | squote }}
-        memory: {{ .Values.odf.osd.requests.memory }}
+        cpu: {{ .Values.ocs.osd.requests.cpu | squote }}
+        memory: {{ .Values.ocs.osd.requests.memory }}
     placement: {}
     preparePlacement: {}
     dataPVCTemplate:
@@ -45,6 +45,6 @@ spec:
         volumeMode: Block
         resources:
           requests:
-            storage: {{ .Values.odf.osd.pvc.storage }}
+            storage: {{ .Values.ocs.osd.pvc.storage }}
       status: {}
     portable: true

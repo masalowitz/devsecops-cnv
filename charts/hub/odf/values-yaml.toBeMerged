@@ -1,4 +1,0 @@
-ocs:
-  storageClass:
-    name: ocs-storagecluster-ceph-rbd
-    objectStoreName: ocs-storagecluster-cephobjectstore
