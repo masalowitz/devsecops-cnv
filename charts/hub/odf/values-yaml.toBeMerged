@@ -1,0 +1,11 @@
+global:
+  xraylab:
+    namespace: "openshift-storage"
+  datacenter:
+    storageClassName: gp2
+    region: us-east-1
+
+ocs:
+  storageClass:
+    name: ocs-storagecluster-ceph-rbd
+    objectStoreName: ocs-storagecluster-cephobjectstore
