@@ -2,6 +2,7 @@ cloudProvider:
   storageClass: default-rwo
 
 ocs:
+  jobTerminationGracePeriod: 300
   namespace: openshift-storage
   mon:
     requests:
