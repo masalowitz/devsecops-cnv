@@ -25,3 +25,26 @@ spec:
   multiCloudGateway:
     dbStorageClassName: {{ .Values.cloudProvider.storageClass }}
     reconcileStrategy: standalone
+  storageDeviceSets:
+  - name: ocs-deviceset
+    config: {}
+    count: 1
+    replica: 3
+    resources:
+      requests:
+        cpu: {{ .Values.odf.osd.requests.cpu | squote }}
+        memory: {{ .Values.odf.osd.requests.memory }}
+    placement: {}
+    preparePlacement: {}
+    dataPVCTemplate:
+      metadata: {}
+      spec:
+        storageClassName: {{ .Values.global.datacenter.storageClassName }}
+        accessModes:
+        - ReadWriteOnce
+        volumeMode: Block
+        resources:
+          requests:
+            storage: {{ .Values.odf.osd.pvc.storage }}
+      status: {}
+    portable: true
