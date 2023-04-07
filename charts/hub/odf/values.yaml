@@ -5,8 +5,8 @@ ocs:
   namespace: openshift-storage
   mon:
     requests:
-       cpu: 1
-       memory: 2Gi
+      cpu: 1
+      memory: 2Gi
   mds:
     requests:
       cpu: 3
@@ -31,7 +31,7 @@ ocs:
       storage: 2Ti
   storageClass:
     name: ocs-storagecluster-ceph-rgw
-    region: us-west-1  #overwritten
+    region: us-west-1  # overwritten
     objectStoreName: ocs-storagecluster-cephobjectstore
 
 toolbox:
@@ -45,7 +45,7 @@ global:
 clusterGroup:
   storageClass: gp2
 
-#Define the odf storageSystem parameters
+# Define the odf storageSystem parameters
 storageSystem:
   deploy: false
   name: ocs-storagecluster-storagesystem
