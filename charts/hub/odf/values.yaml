@@ -42,6 +42,11 @@ toolbox:
 global:
   hub:
     region: us-west-1
+  xraylab:
+    namespace: "openshift-storage"
+  datacenter:
+    storageClassName: gp2
+    region: us-east-1
 
 clusterGroup:
   storageClass: gp2
